@@ -11,14 +11,16 @@ body {
   text-align: center;
   background: linear-gradient(to right, #ff9a9e, #fad0c4);
   color: #fff;
+  overflow: hidden;
 }
 .container {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
+.active { display: flex; }
 button {
   padding: 15px 25px;
   margin: 10px;
@@ -27,81 +29,139 @@ button {
   font-size: 18px;
   cursor: pointer;
 }
-.yes {
-  background-color: #ff4d6d;
-  color: white;
-}
-.no {
-  background-color: #999;
-  color: white;
+.yes { background-color: #ff4d6d; color: white; }
+.no { background-color: #999; color: white; position: absolute; }
+img { max-width: 300px; border-radius: 20px; margin: 10px; }
+#hearts span {
   position: absolute;
+  color: red;
+  animation: float 5s linear infinite;
 }
-.hidden {
-  display: none;
-}
-.fade {
-  animation: fadeIn 1s ease-in-out;
-}
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
 }
 </style>
 </head>
 <body>
 
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<div id="hearts"></div>
+
+<div id="login" class="container active">
+  <h2>Enter Secret Name 💖</h2>
+  <input type="password" id="pass" placeholder="Her nickname">
+  <button onclick="checkPass()">Enter</button>
+</div>
+
 <div id="page1" class="container">
-  <h1>Will you be my Valentine? ❤️</h1>
+  <h1 id="typing"></h1>
   <button class="yes" onclick="showPage('page2')">Yes 💖</button>
   <button class="no" onmouseover="moveNo()">No 😜</button>
 </div>
 
-<div id="page2" class="container hidden">
-  <h1 class="fade">You made me the happiest ❤️</h1>
+<div id="page2" class="container">
+  <h1>You made me the happiest ❤️</h1>
   <button onclick="showPage('page3')">Next ➡️</button>
 </div>
 
-<div id="page3" class="container hidden">
+<div id="page3" class="container">
   <h2>These songs remind me of you 🎶</h2>
-  <iframe width="300" height="170" src="https://www.youtube.com/embed/2Vv-BfVoq4g" frameborder="0" allowfullscreen></iframe>
-  <iframe width="300" height="170" src="https://www.youtube.com/embed/JGwWNGJdvx8" frameborder="0" allowfullscreen></iframe>
+  <iframe width="300" height="170" src="https://www.youtube.com/embed/2Vv-BfVoq4g"></iframe>
   <button onclick="showPage('page4')">Next ➡️</button>
 </div>
 
-<div id="page4" class="container hidden">
-  <h2>Some of my favorite memories with you 📸</h2>
-  <p>This is where I started falling for you...</p>
+<div id="page4" class="container">
+  <h2>Our Memories 📸</h2>
+  <img id="gallery" src="https://via.placeholder.com/300">
+  <button onclick="nextImage()">Next Photo</button>
   <button onclick="showPage('page5')">Next ➡️</button>
 </div>
 
-<div id="page5" class="container hidden">
+<div id="page5" class="container">
   <h2>I may not say it always...</h2>
   <p>But you mean everything to me ❤️</p>
   <button onclick="showPage('page6')">Next ➡️</button>
 </div>
 
-<div id="page6" class="container hidden">
-  <h2>30 days to our big day 💍</h2>
-  <p>I can't wait to make you mine ❤️</p>
+<div id="page6" class="container">
+  <h2>Countdown to our big day 💍</h2>
+  <h1 id="countdown"></h1>
   <button onclick="showPage('page7')">Final Surprise 🎁</button>
 </div>
 
-<div id="page7" class="container hidden">
+<div id="page7" class="container">
   <h1>I Love You ❤️</h1>
   <p>Forever starts with you...</p>
 </div>
 
 <script>
-function showPage(pageId) {
-  document.querySelectorAll('.container').forEach(p => p.classList.add('hidden'));
-  document.getElementById(pageId).classList.remove('hidden');
+const password = "love"; // change this
+function checkPass(){
+  if(document.getElementById('pass').value === password){
+    showPage('page1');
+    typeText();
+  } else alert('Wrong password 😜');
 }
 
-function moveNo() {
-  const btn = document.querySelector('.no');
-  btn.style.top = Math.random() * window.innerHeight + 'px';
-  btn.style.left = Math.random() * window.innerWidth + 'px';
+function showPage(id){
+  document.querySelectorAll('.container').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
+
+function moveNo(){
+  const btn = document.querySelector('.no');
+  btn.style.top = Math.random()*window.innerHeight+'px';
+  btn.style.left = Math.random()*window.innerWidth+'px';
+}
+
+// typing effect
+const text = "Will you be my Valentine? ❤️";
+let i=0;
+function typeText(){
+  if(i<text.length){
+    document.getElementById('typing').innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeText,50);
+  }
+}
+
+// gallery
+const images=[
+  "https://via.placeholder.com/300",
+  "https://via.placeholder.com/301",
+  "https://via.placeholder.com/302"
+];
+let index=0;
+function nextImage(){
+  index=(index+1)%images.length;
+  document.getElementById('gallery').src=images[index];
+}
+
+// countdown
+const targetDate = new Date("2026-05-01").getTime(); // change date
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=targetDate-now;
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+  document.getElementById('countdown').innerHTML=`${d}d ${h}h ${m}m ${s}s`;
+},1000);
+
+// hearts
+setInterval(()=>{
+  const heart=document.createElement('span');
+  heart.innerHTML='❤️';
+  heart.style.left=Math.random()*100+'%';
+  heart.style.fontSize=(Math.random()*20+10)+'px';
+  document.getElementById('hearts').appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},300);
 </script>
 
 </body>
