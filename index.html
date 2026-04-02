@@ -101,11 +101,27 @@ img { max-width: 300px; border-radius: 20px; margin: 10px; }
 <script>
 const password = "love"; // change this
 function checkPass(){
-  if(document.getElementById('pass').value === password){
+  const val = document.getElementById('pass').value;
+  if(val === password){
+    // 🎶 start music
     document.getElementById('bgMusic').play();
-    showPage('page1');
-    typeText();
-  } else alert('Wrong password 😜');
+
+    // 💖 show cute success message before moving on
+    const loginDiv = document.getElementById('login');
+    loginDiv.innerHTML = `
+      <h2>Hehe… that’s my girl 😄❤️</h2>
+      <p>I love calling you that… it’s my favorite name 💕</p>
+      <button onclick="proceed()">Continue ➡️</button>
+    `;
+  } else {
+    alert('Hmm… that doesn’t sound like you 😜 Try again!');
+  }
+}
+
+function proceed(){
+  showPage('page1');
+  typeText();
+} else alert('Wrong password 😜');
 }
 
 function showPage(id){
