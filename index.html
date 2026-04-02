@@ -59,17 +59,23 @@ img {
 
 <body>
 
+<!-- 🎶 Background Music -->
+
 <audio id="bgMusic" loop preload="auto">
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 <div id="hearts"></div>
+
+<!-- 🔐 Login Page -->
 
 <div id="login" class="container active">
   <h2>What do I call you? 💕</h2>
   <input type="password" id="pass" placeholder="Her nickname">
   <button onclick="checkPass()">Enter</button>
 </div>
+
+<!-- 💖 Main Pages -->
 
 <div id="page1" class="container">
   <h1 id="typing"></h1>
@@ -115,6 +121,8 @@ img {
 </div>
 
 <script>
+
+// 🔐 Password
 const password = "love"; // change this
 
 function checkPass(){
@@ -134,22 +142,26 @@ function checkPass(){
   }
 }
 
+// 👉 Move forward
 function proceed(){
   showPage('page1');
   typeText();
 }
 
+// 👉 Page navigation
 function showPage(id){
   document.querySelectorAll('.container').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
+// 😄 Move NO button
 function moveNo(){
   const btn = document.querySelector('.no');
   btn.style.top = Math.random()*window.innerHeight + 'px';
   btn.style.left = Math.random()*window.innerWidth + 'px';
 }
 
+// ⌨️ Typing effect
 const text = "Will you be my Valentine? ❤️";
 let i = 0;
 
@@ -161,6 +173,7 @@ function typeText(){
   }
 }
 
+// 📸 Gallery
 const images = [
   "https://via.placeholder.com/300",
   "https://via.placeholder.com/301",
@@ -174,7 +187,8 @@ function nextImage(){
   document.getElementById('gallery').src = images[index];
 }
 
-const targetDate = new Date("2026-05-01").getTime();
+// ⏳ Countdown
+const targetDate = new Date("2026-05-01").getTime(); // change date
 
 setInterval(()=>{
   const now = new Date().getTime();
@@ -189,6 +203,7 @@ setInterval(()=>{
     d + "d " + h + "h " + m + "m " + s + "s";
 }, 1000);
 
+// ❤️ Floating hearts
 setInterval(()=>{
   const heart = document.createElement('span');
   heart.innerHTML = '❤️';
@@ -199,6 +214,7 @@ setInterval(()=>{
 
   setTimeout(()=>heart.remove(), 5000);
 }, 300);
+
 </script>
 
 </body>
