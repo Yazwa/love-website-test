@@ -23,25 +23,20 @@ body {
   overflow: hidden;
 }
 
-/* 💎 Premium Card */
+/* 💎 Card */
 .container {
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 90%;
   max-width: 360px;
-
   padding: 30px 20px;
   border-radius: 25px;
-
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(25px);
-
   box-shadow: 0 10px 40px rgba(0,0,0,0.25);
   text-align: center;
-
   animation: fadeIn 0.6s ease;
 }
 
@@ -49,17 +44,13 @@ body {
   display: flex;
 }
 
-/* ✨ Animation */
 @keyframes fadeIn {
   from {opacity: 0; transform: scale(0.95);}
   to {opacity: 1; transform: scale(1);}
 }
 
 /* 💖 Titles */
-h1, h2 {
-  color: white;
-}
-
+h1, h2 { color: white; }
 h2 {
   font-family: 'Great Vibes', cursive;
   font-size: 36px;
@@ -85,10 +76,8 @@ button {
   border-radius: 25px;
   font-size: 15px;
   cursor: pointer;
-
   background: linear-gradient(135deg, #ff4d6d, #ff758c);
   color: white;
-
   box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
   transition: 0.3s;
 }
@@ -97,26 +86,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* ❌ No Button (mobile safe) */
-.no {
-  position: relative;
-  background: #777;
-}
-
-/* 📸 Image */
-img {
-  width: 100%;
-  border-radius: 15px;
-  margin-top: 10px;
-}
-
-/* 🎵 iframe fix */
-iframe {
-  border-radius: 12px;
-  margin-top: 10px;
-}
-
-/* ❤️ Floating hearts */
+/* ❤️ Hearts */
 #hearts span {
   position: absolute;
   font-size: 18px;
@@ -130,7 +100,40 @@ iframe {
   100% { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* 📱 Mobile tweaks */
+/* 💖 Valentine Page Special */
+.valentine-page {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+}
+
+/* 💕 Text */
+.val-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 38px;
+  margin-bottom: 20px;
+}
+
+/* 🎯 Button area */
+.btn-group {
+  position: relative;
+  width: 100%;
+  height: 120px;
+}
+
+/* YES */
+.yes-btn {
+  background: linear-gradient(135deg, #00c9a7, #00e4d0);
+}
+
+/* NO */
+.no-btn {
+  position: absolute;
+  left: 60%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #ff6a88, #ff99ac);
+}
+
+/* 📱 Mobile */
 @media(max-width: 400px){
   h2 { font-size: 30px; }
 }
@@ -154,18 +157,23 @@ iframe {
   <button onclick="checkPass()">Reveal the magic 💖</button>
 </div>
 
-<!-- 💖 Pages -->
-<div id="page1" class="container">
-  <h1 id="typing"></h1>
-  <button onclick="showPage('page2')">Yes 💖</button>
-  <button class="no" onclick="moveNo()">No 😜</button>
+<!-- 💖 Page 1 (UPDATED) -->
+<div id="page1" class="container valentine-page">
+  <h1 id="typing" class="val-text"></h1>
+
+  <div class="btn-group">
+    <button class="yes-btn" onclick="showPage('page2')">Yes 💖</button>
+    <button id="noBtn" class="no-btn">No 😜</button>
+  </div>
 </div>
 
+<!-- 💖 Page 2 -->
 <div id="page2" class="container">
   <h1>You made me happiest ❤️</h1>
   <button onclick="showPage('page3')">Next ➡️</button>
 </div>
 
+<!-- 🎶 Page 3 -->
 <div id="page3" class="container">
   <h2>Songs for you 🎶</h2>
   <iframe width="100%" height="180"
@@ -174,6 +182,7 @@ iframe {
   <button onclick="showPage('page4')">Next ➡️</button>
 </div>
 
+<!-- 📸 Page 4 -->
 <div id="page4" class="container">
   <h2>Memories 📸</h2>
   <img id="gallery" src="https://via.placeholder.com/300">
@@ -181,17 +190,20 @@ iframe {
   <button onclick="showPage('page5')">Next ➡️</button>
 </div>
 
+<!-- ❤️ Page 5 -->
 <div id="page5" class="container">
   <h2>You mean everything ❤️</h2>
   <button onclick="showPage('page6')">Next ➡️</button>
 </div>
 
+<!-- ⏳ Page 6 -->
 <div id="page6" class="container">
   <h2>Countdown 💍</h2>
   <h1 id="countdown"></h1>
   <button onclick="showPage('page7')">Final 🎁</button>
 </div>
 
+<!-- 🎁 Page 7 -->
 <div id="page7" class="container">
   <h1>I Love You ❤️</h1>
 </div>
@@ -205,13 +217,11 @@ function checkPass(){
   const val = document.getElementById('pass').value;
 
   if(val === password){
-
-    // 🔊 play only after interaction (mobile safe)
     document.getElementById('bgMusic').play();
 
     document.getElementById('login').innerHTML = `
       <h2>Hehe… that’s my girl 😄❤️</h2>
-      <p>I love calling you that… it’s my favorite name 💕</p>
+      <p>I love calling you that 💕</p>
       <button onclick="proceed()">Continue ➡️</button>
     `;
   } else {
@@ -230,11 +240,6 @@ function showPage(id){
   document.getElementById(id).classList.add('active');
 }
 
-// 😜 Move NO (mobile friendly)
-function moveNo(){
-  alert("No is not an option 😜");
-}
-
 // ⌨️ Typing
 const text = "Will you be my Valentine? ❤️";
 let i = 0;
@@ -246,6 +251,28 @@ function typeText(){
     setTimeout(typeText, 40);
   }
 }
+
+// 😜 Moving NO button
+const noBtn = document.getElementById("noBtn");
+
+function moveButton() {
+  const parent = noBtn.parentElement;
+
+  const maxX = parent.clientWidth - noBtn.clientWidth;
+  const maxY = parent.clientHeight - noBtn.clientHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+// Desktop
+noBtn.addEventListener("mouseenter", moveButton);
+
+// Mobile
+noBtn.addEventListener("touchstart", moveButton);
 
 // 📸 Gallery
 const images = [
@@ -282,7 +309,6 @@ setInterval(()=>{
   const heart = document.createElement('span');
   heart.innerHTML = '❤️';
   heart.style.left = Math.random()*100 + '%';
-
   document.getElementById('hearts').appendChild(heart);
   setTimeout(()=>heart.remove(),5000);
 },300);
