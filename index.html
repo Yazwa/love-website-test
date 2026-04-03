@@ -151,7 +151,7 @@ iframe {
 <div id="login" class="container active">
   <h2>What do I call you? 💕</h2>
   <input type="password" id="pass" placeholder="Your special name">
-  <button onclick="checkPass()">Unlock ❤️</button>
+  <button onclick="checkPass()">Reveal the magic 💖</button>
 </div>
 
 <!-- 💖 Pages -->
@@ -210,7 +210,8 @@ function checkPass(){
     document.getElementById('bgMusic').play();
 
     document.getElementById('login').innerHTML = `
-      <h2>Hehe… that's my girl ❤️</h2>
+      <h2>Hehe… that’s my girl 😄❤️</h2>
+      <p>I love calling you that… it’s my favorite name 💕</p>
       <button onclick="proceed()">Continue ➡️</button>
     `;
   } else {
