@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <title>For You ❤️</title>
 
 <style>
+
+/* 🌈 Background */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -15,37 +19,50 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
+  background: radial-gradient(circle at top, #ff758c, #ff7eb3, #fad0c4);
   overflow: hidden;
 }
 
-/* 💎 Glass Card */
+/* 💎 Premium Card */
 .container {
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  border-radius: 25px;
-  padding: 40px 30px;
-  width: 320px;
+  width: 90%;
+  max-width: 360px;
 
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 30px 20px;
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(25px);
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
   text-align: center;
+
+  animation: fadeIn 0.6s ease;
 }
 
 .active {
   display: flex;
 }
 
-/* 💖 Title */
+/* ✨ Animation */
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
+}
+
+/* 💖 Titles */
+h1, h2 {
+  color: white;
+}
+
 h2 {
   font-family: 'Great Vibes', cursive;
-  font-size: 42px;
-  color: #fff;
-  margin-bottom: 20px;
+  font-size: 36px;
 }
 
 /* ✏️ Input */
@@ -57,43 +74,45 @@ input {
   outline: none;
   font-size: 16px;
   text-align: center;
-
-  background: rgba(255,255,255,0.8);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+  margin-top: 10px;
 }
 
-/* 🚀 Button */
+/* 🚀 Buttons */
 button {
-  margin-top: 20px;
-  padding: 14px 30px;
+  margin-top: 15px;
+  padding: 12px 25px;
   border: none;
-  border-radius: 30px;
-  font-size: 16px;
+  border-radius: 25px;
+  font-size: 15px;
   cursor: pointer;
 
   background: linear-gradient(135deg, #ff4d6d, #ff758c);
   color: white;
 
-  box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
+  transition: 0.3s;
 }
 
-/* ✨ Hover effect */
 button:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(255, 77, 109, 0.6);
+  transform: scale(1.05);
 }
 
-/* ❌ No button */
+/* ❌ No Button (mobile safe) */
 .no {
-  position: absolute;
-  background: #999;
+  position: relative;
+  background: #777;
 }
 
 /* 📸 Image */
 img {
   width: 100%;
   border-radius: 15px;
+  margin-top: 10px;
+}
+
+/* 🎵 iframe fix */
+iframe {
+  border-radius: 12px;
   margin-top: 10px;
 }
 
@@ -110,116 +129,112 @@ img {
   20% { opacity: 1; }
   100% { transform: translateY(-10vh); opacity: 0; }
 }
-</style>
 
+/* 📱 Mobile tweaks */
+@media(max-width: 400px){
+  h2 { font-size: 30px; }
+}
+
+</style>
 </head>
 
 <body>
+
 <div id="hearts"></div>
 
-<!-- 🎶 Background Music -->
-
-<audio id="bgMusic" loop preload="auto">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<!-- 🎶 Music -->
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
-<div id="hearts"></div>
-
-<!-- 🔐 Login Page -->
-
+<!-- 🔐 Login -->
 <div id="login" class="container active">
   <h2>What do I call you? 💕</h2>
-  <input type="password" id="pass" placeholder="Type your special name">
-  <button onclick="checkPass()">Reveal the magic 💖</button>
+  <input type="password" id="pass" placeholder="Your special name">
+  <button onclick="checkPass()">Unlock ❤️</button>
 </div>
 
-<!-- 💖 Main Pages -->
-
+<!-- 💖 Pages -->
 <div id="page1" class="container">
   <h1 id="typing"></h1>
-  <button class="yes" onclick="showPage('page2')">Yes 💖</button>
-  <button class="no" onmouseover="moveNo()">No 😜</button>
+  <button onclick="showPage('page2')">Yes 💖</button>
+  <button class="no" onclick="moveNo()">No 😜</button>
 </div>
 
 <div id="page2" class="container">
-  <h1>You made me the happiest ❤️</h1>
+  <h1>You made me happiest ❤️</h1>
   <button onclick="showPage('page3')">Next ➡️</button>
 </div>
 
 <div id="page3" class="container">
-  <h2>These songs remind me of you 🎶</h2>
-  <iframe width="300" height="170"
+  <h2>Songs for you 🎶</h2>
+  <iframe width="100%" height="180"
     src="https://www.youtube.com/embed/2Vv-BfVoq4g">
   </iframe>
   <button onclick="showPage('page4')">Next ➡️</button>
 </div>
 
 <div id="page4" class="container">
-  <h2>Our Memories 📸</h2>
+  <h2>Memories 📸</h2>
   <img id="gallery" src="https://via.placeholder.com/300">
   <button onclick="nextImage()">Next Photo</button>
   <button onclick="showPage('page5')">Next ➡️</button>
 </div>
 
 <div id="page5" class="container">
-  <h2>I may not say it always...</h2>
-  <p>But you mean everything to me ❤️</p>
+  <h2>You mean everything ❤️</h2>
   <button onclick="showPage('page6')">Next ➡️</button>
 </div>
 
 <div id="page6" class="container">
-  <h2>Countdown to our big day 💍</h2>
+  <h2>Countdown 💍</h2>
   <h1 id="countdown"></h1>
-  <button onclick="showPage('page7')">Final Surprise 🎁</button>
+  <button onclick="showPage('page7')">Final 🎁</button>
 </div>
 
 <div id="page7" class="container">
   <h1>I Love You ❤️</h1>
-  <p>Forever starts with you...</p>
 </div>
 
 <script>
 
 // 🔐 Password
-const password = "love"; // change this
+const password = "love";
 
 function checkPass(){
   const val = document.getElementById('pass').value;
 
   if(val === password){
+
+    // 🔊 play only after interaction (mobile safe)
     document.getElementById('bgMusic').play();
 
-    const loginDiv = document.getElementById('login');
-    loginDiv.innerHTML = `
-      <h2>Hehe… that’s my girl 😄❤️</h2>
-      <p>I love calling you that… it’s my favorite name 💕</p>
+    document.getElementById('login').innerHTML = `
+      <h2>Hehe… that's my girl ❤️</h2>
       <button onclick="proceed()">Continue ➡️</button>
     `;
   } else {
-    alert("Hmm… that doesn’t sound like you 😜 Try again!");
+    alert("Wrong 😜 try again");
   }
 }
 
-// 👉 Move forward
 function proceed(){
   showPage('page1');
   typeText();
 }
 
-// 👉 Page navigation
+// 👉 Navigation
 function showPage(id){
   document.querySelectorAll('.container').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// 😄 Move NO button
+// 😜 Move NO (mobile friendly)
 function moveNo(){
-  const btn = document.querySelector('.no');
-  btn.style.top = Math.random()*window.innerHeight + 'px';
-  btn.style.left = Math.random()*window.innerWidth + 'px';
+  alert("No is not an option 😜");
 }
 
-// ⌨️ Typing effect
+// ⌨️ Typing
 const text = "Will you be my Valentine? ❤️";
 let i = 0;
 
@@ -227,7 +242,7 @@ function typeText(){
   if(i < text.length){
     document.getElementById('typing').innerHTML += text.charAt(i);
     i++;
-    setTimeout(typeText, 50);
+    setTimeout(typeText, 40);
   }
 }
 
@@ -246,7 +261,7 @@ function nextImage(){
 }
 
 // ⏳ Countdown
-const targetDate = new Date("2026-05-01").getTime(); // change date
+const targetDate = new Date("2026-05-01").getTime();
 
 setInterval(()=>{
   const now = new Date().getTime();
@@ -258,20 +273,18 @@ setInterval(()=>{
   const s = Math.floor((diff%(1000*60))/1000);
 
   document.getElementById('countdown').innerHTML =
-    d + "d " + h + "h " + m + "m " + s + "s";
-}, 1000);
+    d+"d "+h+"h "+m+"m "+s+"s";
+},1000);
 
-// ❤️ Floating hearts
+// ❤️ Hearts
 setInterval(()=>{
   const heart = document.createElement('span');
   heart.innerHTML = '❤️';
   heart.style.left = Math.random()*100 + '%';
-  heart.style.fontSize = (Math.random()*20 + 10) + 'px';
 
   document.getElementById('hearts').appendChild(heart);
-
-  setTimeout(()=>heart.remove(), 5000);
-}, 300);
+  setTimeout(()=>heart.remove(),5000);
+},300);
 
 </script>
 
