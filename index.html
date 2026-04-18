@@ -370,15 +370,27 @@
         noBtn.addEventListener('click', moveNoButton);
 
         function startCountdown() {
-            const target = new Date("April 23, 2026 00:00:00").getTime();
+            const engagementDate = new Date("April 23, 2026 00:00:00").getTime();
+            const weddingDate = new Date("August 23, 2026 00:00:00").getTime();
+
             setInterval(() => {
                 const now = new Date().getTime();
+                
+                const target = (now < engagementDate) ? engagementDate : weddingDate;
+                
                 const dist = target - now;
+
                 if (dist > 0) {
                     document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
                     document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
                     document.getElementById("mins").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
                     document.getElementById("secs").innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                } else {
+                    // Once August 23 is also passed, keep it at zeros
+                    document.getElementById("days").innerText = "00";
+                    document.getElementById("hours").innerText = "00";
+                    document.getElementById("mins").innerText = "00";
+                    document.getElementById("secs").innerText = "00";
                 }
             }, 1000);
         }
